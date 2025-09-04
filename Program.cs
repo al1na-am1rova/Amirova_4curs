@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Amirova.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<AmirovaContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AmirovaContext") ?? throw new InvalidOperationException("Connection string 'AmirovaContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
